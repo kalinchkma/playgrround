@@ -1,6 +1,7 @@
+#![allow(dead_code)]
 use std::io;
 
-fn main() {
+pub fn way_too_long_word() {
     let mut n = String::new();
     io::stdin().read_line(&mut n).expect("Error reading line");
     let n = n.trim().parse::<i32>().expect("Error parsing number");
@@ -21,5 +22,5 @@ fn main() {
         word_string.push_str(&format!("{}\n", line));
     }
     println!("{}", word_string);
-
 }
+
