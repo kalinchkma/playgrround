@@ -1,5 +1,4 @@
-use problem::bit_pp;
-
+use problem::next_round;
 fn main() {
-    bit_pp::bit_pp();
+  next_round::next_round();
 }
