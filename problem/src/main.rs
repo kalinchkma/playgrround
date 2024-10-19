@@ -1,5 +1,5 @@
-use problem::domino_piling;
+use problem::beautiful_matrix;
 
 fn main() {
-  domino_piling::domino_pilling();
+  beautiful_matrix::beatifu_matrix();
 }
