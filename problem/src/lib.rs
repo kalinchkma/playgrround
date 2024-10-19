@@ -4,3 +4,4 @@ pub mod bit_pp;
 pub mod next_round;
 pub mod domino_piling;
 pub mod beautiful_matrix;
+pub mod compare_string;

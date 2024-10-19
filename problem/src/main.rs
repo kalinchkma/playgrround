@@ -1,5 +1,5 @@
-use problem::beautiful_matrix;
+use problem::compare_string;
 
 fn main() {
-  beautiful_matrix::beatifu_matrix();
+  compare_string::compare_string();
 }
