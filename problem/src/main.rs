@@ -1,4 +1,5 @@
-use problem::next_round;
+use problem::domino_piling;
+
 fn main() {
-  next_round::next_round();
+  domino_piling::domino_pilling();
 }
