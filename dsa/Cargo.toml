@@ -1,0 +1,12 @@
+[package]
+name="dsa"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name="dsa"
+path="bin/main.rs"
+
+[lib]
+name = "dstd"
+path = "dstd/lib.rs"

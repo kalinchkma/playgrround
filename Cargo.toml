@@ -1,4 +1,6 @@
 [workspace]
 members = [
-    "problem"
+    "problem",
+    "dsa"
 ]
+resolver = "2"
