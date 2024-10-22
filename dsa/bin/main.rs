@@ -51,5 +51,5 @@ fn main() {
     stack.pop();
     println!("{:#?}", stack);
 
-
+    println!("{}", std::mem::size_of::<usize>())
 }
