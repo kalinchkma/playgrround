@@ -1,6 +1,7 @@
 // use dstd::graph::undirected_graph::G;
 // use dstd::queue::Queue;
-use dstd::stack::Stack;
+// use dstd::stack::Stack;
+use dstd::linked_list::singly_linked_list::SinglyLinkedList;
 
 
 fn main() {
@@ -30,26 +31,41 @@ fn main() {
     // q.dequeue();
     // println!("{:#?}", q);
 
-    let mut stack: Stack<i32> = Stack::new();
+    // let mut stack: Stack<i32> = Stack::new();
 
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-    stack.push(4);
-    stack.push(5);
-    stack.push(6);
+    // stack.push(1);
+    // stack.push(2);
+    // stack.push(3);
+    // stack.push(4);
+    // stack.push(5);
+    // stack.push(6);
 
-    println!("{:#?}", stack);
-    stack.pop();
-    stack.pop();
-    stack.pop();
-    stack.pop();
-    stack.pop();
-    println!("{:#?}", stack);
-    stack.pop();
-    println!("{:#?}", stack);
-    stack.pop();
-    println!("{:#?}", stack);
+    // println!("{:#?}", stack);
+    // stack.pop();
+    // stack.pop();
+    // stack.pop();
+    // stack.pop();
+    // stack.pop();
+    // println!("{:#?}", stack);
+    // stack.pop();
+    // println!("{:#?}", stack);
+    // stack.pop();
+    // println!("{:#?}", stack);
 
-    println!("{}", std::mem::size_of::<usize>())
+    // println!("{}", std::mem::size_of::<usize>())
+
+    let mut s_list: SinglyLinkedList<i32> = SinglyLinkedList::new();
+
+    s_list.insert_head(1);
+    s_list.insert_head(2);
+    s_list.insert_head(3);
+
+    println!("{}", s_list);
+    s_list.insert_tail(100);
+    println!("{}", s_list);
+    s_list.insert_tail(98);
+    println!("{}", s_list);
+    s_list.insert_head(77);
+    println!("{}", s_list);
+
 }

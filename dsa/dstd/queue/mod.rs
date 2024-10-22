@@ -39,7 +39,7 @@ impl<T> Queue<T> {
             } else {
                 self.tail = None
             }
-            node.value
+            return node.value
         })
     }
 
