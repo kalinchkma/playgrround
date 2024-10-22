@@ -1,4 +1,4 @@
-use std::fmt::{write, Display};
+use std::fmt::Display;
 
 
 #[derive(Debug)]
@@ -16,7 +16,7 @@ pub struct SinglyLinkedList<T> {
 
 
 impl<T: Copy + Display> SinglyLinkedList<T> {
-    
+
     pub fn new() -> Self {
         Self {
             head: None,
