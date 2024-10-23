@@ -59,6 +59,18 @@ impl<T: Copy + Display> SinglyLinkedList<T> {
 
     }
 
+    pub fn delete_head(&mut self) -> Option<T> {
+        self.head.take().map(|node| {
+            if let Some(next) = node.next {
+                self.head = Some(next);
+                self.length -= 1;
+            } else {
+                self.head = None
+            }
+            node.value
+        })
+    }
+
 }
 
 impl<T: Copy + Display> std::fmt::Display for SinglyLinkedList<T> {

@@ -67,5 +67,6 @@ fn main() {
     println!("{}", s_list);
     s_list.insert_head(77);
     println!("{}", s_list);
-
+    s_list.delete_head();
+    println!("{}", s_list);
 }
