@@ -71,48 +71,48 @@ impl<T: Copy + Display> SinglyLinkedList<T> {
         })
     }
 
-    pub fn delete_tail(&mut self) -> Option<T> {
-        // If the list is empty, return None
-        if self.head.is_none() {
-            return None;
-        }
+    // pub fn delete_tail(&mut self) -> Option<T> {
+    //     // If the list is empty, return None
+    //     if self.head.is_none() {
+    //         return None;
+    //     }
     
-        // If there's only one node in the list
-        if self.head.as_ref()?.next.is_none() {
-            let head_node = self.head.take(); // Remove head
-            self.tail = None; // Update tail to None
-            self.length -= 1;
-            return head_node.map(|node| node.value); // Return the value of the removed node
-        }
+    //     // If there's only one node in the list
+    //     if self.head.as_ref()?.next.is_none() {
+    //         let head_node = self.head.take(); // Remove head
+    //         self.tail = None; // Update tail to None
+    //         self.length -= 1;
+    //         return head_node.map(|node| node.value); // Return the value of the removed node
+    //     }
     
-        // More than one node in the list
-        let mut current = &mut self.head; // Start with the head
-        let mut prev: Option<*mut Node<T>> = None;
+    //     // More than one node in the list
+    //     let mut current = &mut self.head; // Start with the head
+    //     let mut prev: Option<*mut Node<T>> = None;
     
-        // Traverse to the end of the list
-        while let Some(node) = current {
-            if node.next.is_none() {
-                break; // Current is the last node
-            }
-            prev = Some(&mut **node); // Keep track of the previous node
-            current = &mut node.next; // Move to the next node
-        }
+    //     // Traverse to the end of the list
+    //     while let Some(node) = current {
+    //         if node.next.is_none() {
+    //             break; // Current is the last node
+    //         }
+    //         prev = Some(&mut **node); // Keep track of the previous node
+    //         current = &mut node.next; // Move to the next node
+    //     }
         
-        // @TODO: Fix me cannot borrow two mutable
-        // Now `current` is the tail, and `prev` is the second-to-last node
-        if let Some(last_node) = current {
-            if let Some(prev_node) = prev {
-                unsafe {
-                    (*prev_node).next = None; 
-                }
-                self.tail = Some(prev_node as *mut _); // Update tail pointer
-            }
-            self.length -= 1; // Decrement the length
-            return Some(last_node.value); // Return the value of the removed node
-        }
+    //     // @TODO: Fix me cannot borrow two mutable
+    //     // Now `current` is the tail, and `prev` is the second-to-last node
+    //     if let Some(last_node) = current {
+    //         if let Some(prev_node) = prev {
+    //             unsafe {
+    //                 (*prev_node).next = None; 
+    //             }
+    //             self.tail = Some(prev_node as *mut _); // Update tail pointer
+    //         }
+    //         self.length -= 1; // Decrement the length
+    //         return Some(last_node.value); // Return the value of the removed node
+    //     }
     
-        None // Should not reach here
-    }
+    //     None // Should not reach here
+    // }
     
 
 }
