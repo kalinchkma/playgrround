@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	"slices"
+	"strings"
 )
 
-func center_title(document string, width int) string {
+func CenterTitle(document string, width int) string {
 	var mid = width / 2
 	holder := ""
 	tracker := 0
@@ -20,7 +21,7 @@ func center_title(document string, width int) string {
 	return holder
 }
 
-func add_border(document string) string {
+func AddBorder(document string) string {
 	border := ""
 	for range document {
 		border += "*"
@@ -28,16 +29,16 @@ func add_border(document string) string {
 	return fmt.Sprintf("%v\n%v", document, border)
 }
 
-func stylize_title(document string) string {
-	return add_border(center_title(document, 40))
+func StylizeTitle(document string) string {
+	return AddBorder(CenterTitle(document, 40))
 }
 
-func add_prefix(document string, documents []string) []string {
+func AddPrefix(document string, documents []string) []string {
 	prefix := fmt.Sprintf("%v. %v", len(documents), document)
 	return append(documents, prefix)
 }
 
-func median(font_list []int) int {
+func Median(font_list []int) int {
 	lst := font_list
 	slices.Sort(lst)
 	if len(lst)%2 != 0 {
@@ -48,16 +49,61 @@ func median(font_list []int) int {
 	}
 }
 
+func FormatLine(line string) string {
+	str := strings.Trim(line, " ")
+	str = strings.ToUpper(str[:1]) + str[1:]
+
+	return strings.Replace(str, ".", "", -1)
+}
+
+func ToTitle(line string) string {
+	words := strings.Fields(line)
+	for i, w := range words {
+		if len(w) > 0 {
+			words[i] = strings.ToUpper(string(w[0])) + strings.ToLower(w[1:])
+		}
+	}
+	return strings.Join(words, " ")
+}
+
+func TogggleClass(line string) string {
+	str := strings.Replace(line, ".", "", -1)
+	if str == ToTitle(str) {
+		return strings.ToUpper(line) + "!"
+	} else if str == strings.ToUpper(str) {
+		return strings.Replace(fmt.Sprintf("%v%v", strings.ToUpper(line[:1]), strings.ToLower(line[1:])), "!", "", -1)
+	} else if str == strings.ToLower(str) || str[:1] == strings.ToLower(str[:1]) {
+		words := strings.Fields(line)
+		for i, w := range words {
+			if len(w) > 0 {
+				words[i] = strings.ToUpper(string(w[0])) + strings.ToLower(w[1:])
+			}
+		}
+		return strings.Join(words, " ")
+	} else {
+		return line
+	}
+
+}
+
 func main() {
 	title := "List of popular programming language"
 	documents := []string{"go", "python", "rust", "javascript", "c", "c++"}
 
 	doc := []string{}
 	for _, v := range documents {
-		doc = add_prefix(v, doc)
+		doc = AddPrefix(v, doc)
 	}
-	fmt.Println(stylize_title(title))
+	fmt.Println(StylizeTitle(title))
 	fmt.Println(doc)
-	fmt.Println(median([]int{10, 8, 7, 5}))
-	fmt.Println(median([]int{1, 2, 3}))
+	fmt.Println(Median([]int{10, 8, 7, 5}))
+	fmt.Println(Median([]int{1, 2, 3}))
+	fmt.Println(FormatLine("  ajksd kjahsd asjkd. qweqwe. qweqw. qweqwe. sadqwae2wqe. qweq. wqe    "))
+
+	fmt.Println(TogggleClass("live long and prosper"))
+
+	fmt.Println(TogggleClass("...Khan"))
+
+	fmt.Println(TogggleClass("BEAM ME UP, BOOTS!"))
+
 }
