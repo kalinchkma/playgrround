@@ -22,3 +22,25 @@ func ListAdd10(add func(int, int) int, lst []int) []int {
 	}
 	return cp
 }
+
+// Closures:
+// A closure is a function that reference variable from outside its own function body
+func Entity() func() int {
+	counter := 0
+	return func() int {
+		counter++
+		return counter
+	}
+}
+
+// Currying:
+// Function curring is a specific kind of function transformation where we translate a single function
+// that accepts mutiple arguments into multiple functions that each accept a single argument
+func CurrySum(x int) func(int) int {
+	return func(y int) int {
+		return x + y
+	}
+}
+
+// Decorator:
+// Decorators are just syntactic sugar for higher order functions

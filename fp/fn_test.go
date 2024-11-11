@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -29,4 +30,25 @@ func TestListAdd10(t *testing.T) {
 		}
 	}
 
+}
+
+func TestEntity(t *testing.T) {
+	fn := Entity()
+
+	e1 := fn()
+
+	e2 := fn()
+	e3 := fn()
+
+	if e1 != 1 || e2 != 2 || e3 != 3 {
+		t.Error("==========Faild=================")
+	}
+}
+
+func TestCurrySum(t *testing.T) {
+	if CurrySum(2)(2) != 4 {
+		fmt.Println("Faild curry sum")
+	} else {
+		fmt.Println("Curry sum PASS")
+	}
 }
