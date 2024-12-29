@@ -35,3 +35,43 @@ Example 2: Given a sorted array of unique integers and a target integer, return 
 For example, given nums = [1, 2, 4, 6, 8, 9, 14, 15] and target = 13, return true because 4 + 9 = 13
 
 Note: i we solve this with brute force time complexity will be `0(n^2)`. we can improve it using two pointer time complexity will be `0(n)`.
+
+
+Another way to use two pointers
+
+`Move along both inputs simultaneously until all elements have been checked`
+
+Instructions:
+
+1. Create two pointers, one for each iterable. Each pointer should start at the first index.
+2. Use a while loop until one of the pointers reaches the end of its iterable.
+3. At each iteration of the loop, move the pointers forward. This means incrementing either one of the pointers of both pointers.
+4. Because our while loop will stop when one of the pointers reaches the end, the other pointer will not be at the end of its respective iterable when loop finishes.
+
+```code
+function fn(arr1, arr2):
+    i = j = 0
+    while i < arr2.length AND j < arr2.length:
+        Do some logic here depending on the problem
+        Do some more logic here to decide on one of the following:
+            1. i++
+            2. j++
+            3. Both i++ and j++
+        // Step 4: make sure both iterables are exhausted
+        // Note that one of these loops would run
+        while i < arr1.length:
+            Do some logic here depending on the problem
+            i++
+        
+        while j < arr2.length:
+            Do some logic here depending on the problem
+            j++
+```
+Similer to above this method have a linear time complexity of `0(n+m)`
+
+Example 3: Given two sorted integer arrays arr1 and arr2, return a new array that combines both of them and is also sorted.
+
+Example 4: Is Subsequence
+Given two string `s` and `t`, return `true` is `s` is a subsequence of `t`, or `false` otherwise.
+
+A subsequence of a string is a sequence of characters that can be obtained by deleting some (or none) of the characters from the original string, while maintaining the relative order of the remaining characters. For example, "ace" is a subsequence of "abcde" while "aec" is not.
