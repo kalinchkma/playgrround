@@ -120,3 +120,5 @@ Example 4: Given an integer array nums and an integer k, find the sum of the sub
 As we mentioned before, we can build a window of length k and then slide it along the array. Add and remove one element at a time to make sure the window stays size k. If we are adding the value at i, then we need to remove the value at i - k.
 
 After we build the first window we initialize our answer to curr to consider the first window's sum.
+
+[ref](https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4502/)
