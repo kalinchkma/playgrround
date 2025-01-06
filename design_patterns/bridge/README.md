@@ -1,0 +1,7 @@
+## Bridge patterns
+
+
+
+
+
+
