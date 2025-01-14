@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"go_basic/gc"
 	"go_basic/logger"
@@ -18,6 +19,7 @@ func main() {
 
 	mux.HandleFunc("/", requestLogging(helloWorld))
 	mux.HandleFunc("/memory", requestLogging(getRuntimeStats))
+	mux.HandleFunc("/memory2", requestLogging(getRuntime2))
 
 	server := http.Server{
 		Addr:    ":8080",
@@ -44,10 +46,28 @@ func getRuntimeStats(w http.ResponseWriter, r *http.Request) {
 	var mem runtime.MemStats
 	t := make([][]byte, 101)
 	for i := 0; i <= 100; i++ {
-		s := make([]byte, 500000)
+		s := make([]byte, 5000)
 		t[i] = s
 
 	}
-	println(t)
-	w.Write([]byte(gc.PrintMemoryStats(mem)))
+	fmt.Println(t)
+	stat, err := json.Marshal(gc.PrintMemoryStats(mem))
+	if err != nil {
+		w.Write([]byte("Json error"))
+		return
+	}
+	w.Write([]byte(stat))
+	fmt.Println(gc.PrintMemoryStats(mem))
+}
+
+func getRuntime2(w http.ResponseWriter, r *http.Request) {
+	var mem runtime.MemStats
+
+	stat, err := json.Marshal(gc.PrintMemoryStats(mem))
+	if err != nil {
+		w.Write([]byte("Json error"))
+		return
+	}
+	w.Write([]byte(stat))
+	fmt.Println(gc.PrintMemoryStats(mem))
 }
