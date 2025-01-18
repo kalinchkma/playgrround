@@ -4,6 +4,7 @@ option go_package = "grpc_ms/orders";
 
 service OrderService {
     rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+    rpc GetOrders(GetOrdersRequest) returns (GetOrderResponse) {}
 }
 
 message Order {
