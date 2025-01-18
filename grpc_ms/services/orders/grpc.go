@@ -1,6 +1,8 @@
 package main
 
 import (
+	handler "grpc_ms/services/orders/handler/orders"
+	"grpc_ms/services/orders/service"
 	"log"
 	"net"
 
@@ -24,6 +26,9 @@ func (s *gRPCServer) Run() error {
 	grpcServer := grpc.NewServer()
 
 	// register gRPC services
+	orderService := service.NewOrderService()
+
+	handler.NewGrpcOrdersService(grpcServer, orderService)
 
 	log.Println("Starting gRPC server on ", s.addr)
 	return grpcServer.Serve(listener)
