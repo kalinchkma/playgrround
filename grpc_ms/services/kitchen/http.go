@@ -29,15 +29,15 @@ func (s *httpServer) Run() error {
 		ctx, cancel := context.WithTimeout(r.Context(), time.Second*2)
 		defer cancel()
 
-		_, err := c.CreateOrder(ctx, &orders.CreateOrderRequest{
-			CustomerID: 24,
-			ProductID:  321,
-			Quantity:   2,
-		})
+		// _, err := c.CreateOrder(ctx, &orders.CreateOrderRequest{
+		// 	CustomerID: 24,
+		// 	ProductID:  321,
+		// 	Quantity:   2,
+		// })
 
-		if err != nil {
-			log.Fatalf("client error: %v", err)
-		}
+		// if err != nil {
+		// 	log.Fatalf("client error: %v", err)
+		// }
 
 		res, err := c.GetOrders(ctx, &orders.GetOrdersRequest{
 			CustomerID: 42,
