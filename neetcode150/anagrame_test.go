@@ -25,7 +25,7 @@ func isAnagram(s string, t string) bool {
 }
 
 func TestAnagram(t *testing.T) {
-	if isAnagram("ggii", "eekk") {
+	if !isAnagram("ggii", "eekk") {
 		t.Log("Pass")
 	} else {
 		t.Fatalf("Falid")
