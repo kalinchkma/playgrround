@@ -26,3 +26,13 @@ And finally, focus on devlivering value to your users, they are the ones who wil
     -------------
     | Storage   |
     -------------
+
+### Database migration with migrate tools
+
+```bash
+migrate create -seq -ext sql -dir ./cmd/migrate/migrations name
+```
+
+```bash
+migrate -path=./cmd/migrate/migrations -database="postgres://admin:adminpassword@localhost/social?sslmode=disable" up/down
+```
