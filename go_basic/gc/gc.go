@@ -9,6 +9,7 @@ type MemoryStat struct {
 	MemoryAllocated          string
 	TotalMemoryAllocated     string
 	HeapMemoryAllocated      string
+	SystemMemory             uint64
 	NumberOfGarbageCollector string
 }
 
@@ -16,9 +17,10 @@ type MemoryStat struct {
 func PrintMemoryStats(mem runtime.MemStats) MemoryStat {
 	runtime.ReadMemStats(&mem)
 	stat := MemoryStat{
-		MemoryAllocated:          fmt.Sprint(mem.Alloc),
-		TotalMemoryAllocated:     fmt.Sprint(mem.TotalAlloc),
-		HeapMemoryAllocated:      fmt.Sprint(mem.HeapAlloc),
+		MemoryAllocated:          fmt.Sprint(float64(mem.Alloc)/1024/1024, "MB"),
+		TotalMemoryAllocated:     fmt.Sprint(float64(mem.TotalAlloc)/1024/1024, "MB"),
+		HeapMemoryAllocated:      fmt.Sprint(float64(mem.HeapAlloc)/1024/1024, "MB"),
+		SystemMemory:             mem.Sys / 1024 / 1024,
 		NumberOfGarbageCollector: fmt.Sprint(mem.NumGC),
 	}
 	return stat

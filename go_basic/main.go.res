@@ -8,15 +8,10 @@ import (
 	"log"
 	"net/http"
 	"runtime"
-	"sync"
 	"time"
 )
 
-var bufferPool = sync.Pool{
-	New: func() any {
-		return make([]byte, 50000)
-	},
-}
+var requestCounter = 0
 
 func main() {
 
@@ -38,7 +33,8 @@ func main() {
 func requestLogging(f http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		l := logger.NewServiceLogger("logs")
-		l.Log("log", fmt.Sprint("Total Request on time: ", time.Now()))
+		requestCounter++
+		l.Log("log", fmt.Sprint("Total Request on time: ", time.Now(), requestCounter))
 		f(w, r)
 	}
 }
@@ -51,10 +47,8 @@ func getRuntimeStats(w http.ResponseWriter, r *http.Request) {
 	var mem runtime.MemStats
 	t := make([][]byte, 101)
 	for i := 0; i <= 100; i++ {
-		s := bufferPool.Get().([]byte)
+		s := make([]byte, 50000)
 		t[i] = s
-
-		bufferPool.Put(s)
 	}
 
 	stat, err := json.Marshal(gc.PrintMemoryStats(mem))
