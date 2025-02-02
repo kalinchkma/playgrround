@@ -1,11 +1,24 @@
 package main
 
 func main() {
-	n := 4
-	inc(&n)
-	println(n)
+	x := 'A'
+
+	NotEscape(&x)
+
+	println(x)
+
+	// This will escapes to heap
+	z := Escape(10)
+
+	println(z)
 }
 
-func inc(n *int) {
-	*n++
+func NotEscape(x *rune) {
+	*x++
+}
+
+// This local variable move to the heap
+func Escape(x int) *int {
+	y := x * 10
+	return &y
 }
