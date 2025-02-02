@@ -11,6 +11,7 @@ func main() {
 	z := Escape(10)
 
 	println(z)
+
 }
 
 func NotEscape(x *rune) {

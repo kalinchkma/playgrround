@@ -46,10 +46,11 @@
 #### `new` vs `make`
 
 
-| `new` | `make` |
-| ------| -------|
-| New only allocates memory, it dose not initialize it | Make creates and initialized default value |
-| New return allocates zeroed address | Make return initialized value of type T |
+- *New* only allocates memory, it dose not initialize it 
+- *Make* creates and initialized default value 
+- *New* return allocates zeroed address 
+- *Make* return initialized value of type T
+
 
 zero values of various types
 
@@ -64,5 +65,5 @@ zero values of various types
 | slices  | nil     |
 | map  | nil     |
 | channels  | nil     |
-| struct  | resprected value     |
+| struct  | resprected value  |
 
