@@ -5,3 +5,4 @@ target
 mern/api/node_modules
 mern/api/dist
 client/api/node_modules
+linear_algebra/env
