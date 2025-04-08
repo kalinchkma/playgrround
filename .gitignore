@@ -7,4 +7,6 @@ mern/api/dist
 client/api/node_modules
 linear_algebra/env
 linear_algebra/.ipynb_checkpoints
+llm/a.out
+llm/main
 
