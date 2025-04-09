@@ -1,2 +1,2 @@
 run:
-	@gcc main.c && ./main && echo ""
+	@gcc main.c -o main && ./main && echo ""

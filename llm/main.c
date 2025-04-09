@@ -3,7 +3,8 @@
 
 int main() 
 {
-    printf("Hello world");
+   
+    printf("Working with llm in c");
     return 0;
 }
 
