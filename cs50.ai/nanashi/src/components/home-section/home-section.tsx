@@ -8,7 +8,7 @@ import { personalInfo, siteConfig } from "@/config/site";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
 import NavLink from "../common/nav-link";
-import ThemeChanger from "../common/theme-changer";
+
 
 
 function HomeSection() {
@@ -25,30 +25,31 @@ function HomeSection() {
             <Avatar className="w-[200px] h-[200px] md:w-[350px] md:h-[350px]">
                 <AvatarImage src="mrk.png" className="object-cover" />
             </Avatar>
-            <ThemeChanger className="absolute left-[50%] -translate-x-1/2 bottom-0" />
+            
         </div>
         <div className="flex flex-col items-start justify-start gap-6">
             {/* description section */}
-            <div className="text-zinc-100">
-                <h1 className="text-xl md:text-3xl lg:text-4xl font-bold mb-4 text-center lg:text-left">Hello, I&apos;m {personalInfo.name}</h1>
-                <p className="text-lg max-w-xl text-left">
+            <div className="text-zinc-800 dark:text-zinc-100">
+                <h1 className="text-xl md:text-3xl lg:text-4xl font-bold mb-4 text-center lg:text-left">Hi, I&apos;m {personalInfo.name}</h1>
+                <p className="text-lg max-w-xl text-center lg:text-left ">
                 {personalInfo.description}
                 </p>
             </div>
+            
             {/* bio */}
             <div className="flex flex-col">
-                <h5 className="text-left text-zinc-50 text-xl font-bold">Bio</h5>
-                <p className="max-w-xl text-left text-zinc-100">
+                <h5 className="text-left text-zinc-800 dark:text-zinc-100 text-xl font-bold">Bio</h5>
+                <p className="max-w-xl text-left text-zinc-800 dark:text-zinc-100">
                     {personalInfo.bio}
                 </p>
             </div>
         </div>
     </div>
-    <div className="w-full flex flex-col lg:flex-row gap-5 text-zinc-100">
+    <div className="w-full flex flex-col lg:flex-row gap-5 text-zinc-800 dark:text-zinc-100">
         {/* Email */}
         <div className='flex flex-col items-start w-full'>
             <p className="font-semibold mb-1 text-xl">Email</p>
-            <p>{personalInfo.email}</p>
+            <p className="text-zinc-800 font-mono dark:text-zinc-100">{personalInfo.email}</p>
         </div>
         {/* Socials */}
         <div className='flex flex-col items-start w-full'>
@@ -57,7 +58,7 @@ function HomeSection() {
                 {
                     personalInfo.social.map((s, idx) => (
                     
-                        <a key={idx} href={s.href} target="_blank" className="hover:text-black">
+                        <a key={idx} href={s.href} target="_blank" className="hover:text-black dark:hover:text-zinc-300">
                             <s.icon className="w-5 h-5" />
                         </a> 
                     ))
@@ -65,7 +66,7 @@ function HomeSection() {
             </div>
         </div>
     </div>
-    <Separator className="bg-zinc-700" />
+    <Separator className="bg-zinc-400 dark:bg-zinc-700" />
     <div className="flex items-center space-x-4 text-sm h-5">
     {
         siteConfig.mainNav.map((l, idx) => (
@@ -73,7 +74,7 @@ function HomeSection() {
             <NavLink key={idx} {...l} />
             {
                 siteConfig.mainNav.length - 1 !== idx && 
-                <Separator orientation="vertical" className="bg-zinc-700" />
+                <Separator orientation="vertical" className="bg-zinc-400 dark:bg-zinc-700" />
             }
             </>
         ))
