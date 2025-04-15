@@ -8,6 +8,7 @@ import { personalInfo, siteConfig } from "@/config/site";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
 import NavLink from "../common/nav-link";
+import React from "react";
 
 
 
@@ -70,13 +71,13 @@ function HomeSection() {
     <div className="flex items-center space-x-4 text-sm h-5">
     {
         siteConfig.mainNav.map((l, idx) => (
-            <>
-            <NavLink key={idx} {...l} />
-            {
-                siteConfig.mainNav.length - 1 !== idx && 
-                <Separator orientation="vertical" className="bg-zinc-400 dark:bg-zinc-700" />
-            }
-            </>
+            <React.Fragment key={idx}>
+                <NavLink  {...l} />
+                {
+                    siteConfig.mainNav.length - 1 !== idx && 
+                    <Separator orientation="vertical" className="bg-zinc-400 dark:bg-zinc-700" />
+                }
+            </React.Fragment>
         ))
     }
     </div>

@@ -10,8 +10,8 @@ export const siteConfig = {
             href: "/blogs"
         },
         {
-            title: "Explore Creation",
-            href: "/explore"
+            title: "Explore Creations",
+            href: "/creations"
         }
     ] satisfies MainNavItem[]
 }
