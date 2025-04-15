@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header/Header";
+import { siteConfig } from "@/config/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kalin Chakma",
-  description: "Personal website of Kalin Chakma",
+  title: siteConfig.name,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({
@@ -28,9 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-900`}
       >
-        <Header />
         {children}
-    
       </body>
     </html>
   );

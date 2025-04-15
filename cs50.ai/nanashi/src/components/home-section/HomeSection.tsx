@@ -1,13 +1,14 @@
 "use client"
 import {motion} from "framer-motion";
 
+import { personalInfo } from "@/config/site";
 // import Link from "next/link"
 // import { Icons } from "../common/icons"
 
-import { Icons } from "../common/icons";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
-function HeroSection() {
+
+function HomeSection() {
   return (
     <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -25,34 +26,42 @@ function HeroSection() {
         <div className="flex flex-col items-start justify-start gap-6">
             {/* description section */}
             <div className="text-zinc-100">
-                <h1 className="text-4xl font-bold mb-4 text-left">Hello, I&apos;m Kalin Chakma</h1>
+                <h1 className="text-4xl font-bold mb-4 text-left">Hello, I&apos;m {personalInfo.name}</h1>
                 <p className="text-lg max-w-xl text-left">
-                Software Engineer | Passionate about making electronic circuits into intelligence being
+                {personalInfo.description}
                 </p>
             </div>
             {/* bio */}
             <div className="flex flex-col">
                 <h5 className="text-left text-zinc-50 text-xl font-bold">Bio</h5>
                 <p className="max-w-xl text-left text-zinc-100">
-                I am just a human species with complex molecules and other energy or particle simulations stuck on a binary system in augmented reality
+                    {personalInfo.bio}
                 </p>
             </div>
             <div className="w-full flex flex-col md:flex-row gap-12 text-zinc-100">
                 {/* Email */}
                 <div className='flex flex-col items-start'>
                     <p className="font-semibold mb-1 text-xl">Email</p>
-                    <p>info@mysite.com</p>
+                    <p>{personalInfo.email}</p>
                 </div>
                 {/* Socials */}
                 <div className='flex flex-col items-start'>
                     <p className="font-semibold mb-1 text-xl">Connect me</p>
                     <div className="flex gap-3 mt-1 items-center">
-                        <a href="https://linkedin.com" target="_blank" className="hover:text-black">
+                        {/* <a href="https://linkedin.com" target="_blank" className="hover:text-black">
                         <Icons.gitHub className='w-6 h-6' />
                         </a>
                         <a href="https://twitter.com" target="_blank" className="hover:text-black">
                         <Icons.x className='w-5 h-5'/>
-                        </a>
+                        </a> */}
+                        {
+                            personalInfo.social.map((s, idx) => (
+                                <a key={idx} href={s.href} target="_blank" className="hover:text-black">
+                                    <s.icon className="w-5 h-5" />
+                                {/* <Icons.x className='w-5 h-5'/> */}
+                                </a> 
+                            ))
+                        }
                     </div>
                 </div>
             </div>
@@ -63,4 +72,4 @@ function HeroSection() {
   )
 }
 
-export default HeroSection
+export default HomeSection
