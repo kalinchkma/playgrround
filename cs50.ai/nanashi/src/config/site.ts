@@ -10,8 +10,8 @@ export const siteConfig = {
             href: "/blogs"
         },
         {
-            title: "Explore Creations",
-            href: "/creations"
+            title: "Explore Contributions",
+            href: "/contributions"
         }
     ] satisfies MainNavItem[]
 }
@@ -35,4 +35,12 @@ export const personalInfo = {
             icon: Icons.x
         }
     ] satisfies NavItem[]
+}
+
+export const creationsConfig = {
+    title: "Contributions"
+}
+
+export const blogsConfig = {
+    title: "Blogs"
 }

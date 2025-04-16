@@ -12,7 +12,6 @@ const roboto = Roboto({
 });
 
 
-
 export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,

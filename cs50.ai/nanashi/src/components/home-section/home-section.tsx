@@ -72,7 +72,7 @@ function HomeSection() {
     {
         siteConfig.mainNav.map((l, idx) => (
             <React.Fragment key={idx}>
-                <NavLink  {...l} />
+                <NavLink {...l} />
                 {
                     siteConfig.mainNav.length - 1 !== idx && 
                     <Separator orientation="vertical" className="bg-zinc-400 dark:bg-zinc-700" />

@@ -4,7 +4,7 @@ import React from 'react'
 
 const NavLink = (link: NavItem) => {
   return (
-    <Link href={link.href ?? "#"} className='underline text-zinc-800 dark:text-zinc-100'>{link.title}</Link>
+    <Link href={link.href ?? "#"} className='underline text-blue-900 dark:text-blue-400'>{link.title}</Link>
   )
 }
 
