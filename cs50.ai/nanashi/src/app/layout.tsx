@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${roboto.variable} antialiased bg-zinc-100 dark:bg-zinc-900`}
+        className={`${roboto.variable} antialiased bg-white dark:bg-zinc-900`}
       >
         <ThemeProvider 
           attribute={"class"}
@@ -34,7 +34,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <ThemeChanger className="absolute right-5 bottom-5" />
+          <ThemeChanger className="fixed right-5 bottom-5" />
         </ThemeProvider>
       </body>
     </html>

@@ -11,7 +11,7 @@ interface Props {
 const PageHeaderWithBack: FC<Props> = ({title}) => {
     const router = useRouter();
   return (
-    <div className='w-full border-b dark:bg-zinc-800/90 bg-gray-100'>
+    <div className='w-full border-b dark:bg-zinc-800/90 bg-gray-50'>
         <div className='container mx-auto px-4 flex flex-row items-center relative py-2'>
             <button onClick={() => {
                 router.back();
