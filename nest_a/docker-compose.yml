@@ -1,21 +1,12 @@
-version: '3.8'
-
 services:
-  cassandra:
-    image: cassandra:4.1
-    container_name: cassandra
+  qdrant:
+    image: qdrant/qdrant
+    container_name: qdrant
     ports:
-      - "9042:9042"   # CQL port
-      - "9160:9160"   # Thrift port (optional/legacy)
-    environment:
-      - CASSANDRA_CLUSTER_NAME=${CASSANDRA_CLUSTER_NAME}
-      - CASSANDRA_NUM_TOKENS=${CASSANDRA_NUM_TOKENS}
-      - CASSANDRA_DC=${CASSANDRA_DC}
-      - CASSANDRA_RACK=${CASSANDRA_RACK}
-      - CASSANDRA_ENDPOINT_SNITCH=${CASSANDRA_ENDPOINT_SNITCH}
-      - CASSANDRA_START_RPC=${CASSANDRA_START_RPC}
+      - "6333:6333"
+      - "6334:6334"
     volumes:
-      - cassandra_data:/var/lib/cassandra
+      - qdrant_data:/qdrant/storage
 
 volumes:
-  cassandra_data:
+  qdrant_data:

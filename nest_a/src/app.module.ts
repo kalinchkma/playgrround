@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { LangchainModule } from './modules/langchain/langchain.module';
+import { VectorstoreModule } from './src/modules/vectorstore/vectorstore.module';
 
 @Module({
-  imports: [AuthModule, LangchainModule],
+  imports: [AuthModule, LangchainModule, VectorstoreModule],
   controllers: [AppController],
   providers: [AppService],
 })
