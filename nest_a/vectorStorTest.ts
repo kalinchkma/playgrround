@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { QdrantVectorStore } from '@langchain/qdrant';
 import type { Document } from '@langchain/core/documents';
 import * as dotenv from 'dotenv';
