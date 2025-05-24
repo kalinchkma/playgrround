@@ -4,9 +4,13 @@ import { AppModule } from './app.module';
 import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { GlobalExceptionsFilter } from './filters/global-filter';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const grpcApp = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
+    transport: Transport.GRPC,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -41,6 +45,8 @@ async function bootstrap() {
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
+
+  await grpcApp.listen();
 
   await app.listen(process.env.PORT ?? 3000);
 }
