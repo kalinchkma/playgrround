@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package amaghor;
+
+service AmaghorService {
+  rpc GetAmaghorData (AmaghorRequest) returns (AmaghorResponse);
+}
+message AmaghorRequest {
+  string query = 1;
+}
+message AmaghorResponse {
+  string result = 1;
+  repeated string errors = 2;
+}

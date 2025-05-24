@@ -8,9 +8,17 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const grpcApp = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-    transport: Transport.GRPC,
-  });
+  const grpcApp = await NestFactory.createMicroservice<MicroserviceOptions>(
+    AppModule,
+    {
+      transport: Transport.GRPC,
+      options: {
+        package: 'amaghor',
+        protoPath: 'proto/amaghor.proto',
+        url: '0.0.0.0:50051',
+      },
+    },
+  );
 
   app.useGlobalPipes(
     new ValidationPipe({

@@ -17,10 +17,13 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "generate:proto": "protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=src/types proto/*.proto --ts_proto_opt=nestJs=true"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "@grpc/grpc-js": "^1.13.4",
+    "@grpc/proto-loader": "^0.7.15",
     "@langchain/community": "^0.3.42",
     "@langchain/core": "^0.3.55",
     "@langchain/google-genai": "^0.2.9",
@@ -41,7 +44,8 @@
     "dotenv": "^16.5.0",
     "langchain": "^0.3.24",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "ts-proto": "^2.7.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
