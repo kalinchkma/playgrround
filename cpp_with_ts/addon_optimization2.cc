@@ -2,6 +2,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <array>
 
 Napi::Object DecorateObjects(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
@@ -17,7 +18,9 @@ Napi::Object DecorateObjects(const Napi::CallbackInfo& info) {
     // Pre-allocate output and temporary storage
     Napi::Object outputObj = Napi::Object::New(env);
     std::unordered_map<std::string, std::vector<std::pair<std::string, Napi::Value>>> tempGroups;
-    tempGroups.reserve(10); // Estimate number of groups (e.g., dealer, address, etc.)
+    tempGroups.reserve(10); // Estimated number of groups
+    constexpr size_t maxKeyLength = 64; // Max length for group/prop keys
+    std::array<char, maxKeyLength> keyBuffer;
 
     for (uint32_t i = 0; i < length; i++) {
         Napi::Value item = inputArray.Get(i);
@@ -29,43 +32,42 @@ Napi::Object DecorateObjects(const Napi::CallbackInfo& info) {
         Napi::Array propertyNames = Napi::Array(env, props);
         uint32_t propLength = propertyNames.Length();
 
+        // Pre-allocate vector for properties
         for (uint32_t j = 0; j < propLength; j++) {
             Napi::Value keyVal = propertyNames.Get(j);
             if (!keyVal.IsString()) continue;
 
-            std::string keyStr;
-            napi_status status = napi_get_value_string_utf8(env, keyVal, nullptr, 0, nullptr);
-            if (status != napi_ok) continue;
-            size_t keyLen;
-            status = napi_get_value_string_utf8(env, keyVal, nullptr, 0, &keyLen);
-            if (status != napi_ok) continue;
-            keyStr.resize(keyLen);
-            status = napi_get_value_string_utf8(env, keyVal, &keyStr[0], keyLen + 1, nullptr);
-            if (status != napi_ok) continue;
+            size_t written;
+            napi_status status = napi_get_value_string_utf8(env, keyVal, keyBuffer.data(), maxKeyLength, &written);
+            if (status != napi_ok || written >= maxKeyLength) continue;
 
+            std::string keyStr(keyBuffer.data(), written);
             size_t underscorePos = keyStr.find('_');
             if (underscorePos == std::string::npos) continue;
 
             std::string groupKey = keyStr.substr(0, underscorePos);
             std::string propKey = keyStr.substr(underscorePos + 1);
 
-            tempGroups[groupKey].emplace_back(propKey, inputObj.Get(keyStr));
+            auto& group = tempGroups[groupKey];
+            if (group.empty()) {
+                group.reserve(propLength); // Reserve space for properties
+            }
+            group.emplace_back(propKey, inputObj.Get(keyVal));
         }
     }
 
     // Construct output in one pass
     for (auto& pair : tempGroups) {
         Napi::Object groupObj = Napi::Object::New(env);
-        auto& props = pair.second;
-        props.reserve(props.size());
-        for (const auto& prop : props) {
-            groupObj.Set(prop.first, prop.second);
+        for (const auto& prop : pair.second) {
+            napi_set_property(env, groupObj, Napi::String::New(env, prop.first), prop.second);
         }
-        outputObj.Set(pair.first, groupObj);
+        napi_set_property(env, outputObj, Napi::String::New(env, pair.first), groupObj);
     }
 
     return outputObj;
 }
+
 
 Napi::String MyMethod(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();

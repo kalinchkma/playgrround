@@ -12,36 +12,23 @@ Napi::Object DecorateObjects(const Napi::CallbackInfo& info) {
     }
 
     Napi::Array inputArray = info[0].As<Napi::Array>();
-    uint32_t length = inputArray.Length();
-
-    // Pre-allocate output and temporary storage
     Napi::Object outputObj = Napi::Object::New(env);
     std::unordered_map<std::string, std::vector<std::pair<std::string, Napi::Value>>> tempGroups;
-    tempGroups.reserve(10); // Estimate number of groups (e.g., dealer, address, etc.)
+
+    uint32_t length = inputArray.Length();
 
     for (uint32_t i = 0; i < length; i++) {
         Napi::Value item = inputArray.Get(i);
         if (!item.IsObject()) continue;
 
         Napi::Object inputObj = item.As<Napi::Object>();
-        napi_value props;
-        napi_get_property_names(env, inputObj, &props);
-        Napi::Array propertyNames = Napi::Array(env, props);
+        Napi::Array propertyNames = inputObj.GetPropertyNames();
         uint32_t propLength = propertyNames.Length();
 
         for (uint32_t j = 0; j < propLength; j++) {
-            Napi::Value keyVal = propertyNames.Get(j);
-            if (!keyVal.IsString()) continue;
-
-            std::string keyStr;
-            napi_status status = napi_get_value_string_utf8(env, keyVal, nullptr, 0, nullptr);
-            if (status != napi_ok) continue;
-            size_t keyLen;
-            status = napi_get_value_string_utf8(env, keyVal, nullptr, 0, &keyLen);
-            if (status != napi_ok) continue;
-            keyStr.resize(keyLen);
-            status = napi_get_value_string_utf8(env, keyVal, &keyStr[0], keyLen + 1, nullptr);
-            if (status != napi_ok) continue;
+            Napi::Value key = propertyNames.Get(j);
+            if (!key.IsString()) continue;
+            std::string keyStr = key.As<Napi::String>().Utf8Value();
 
             size_t underscorePos = keyStr.find('_');
             if (underscorePos == std::string::npos) continue;
@@ -53,12 +40,9 @@ Napi::Object DecorateObjects(const Napi::CallbackInfo& info) {
         }
     }
 
-    // Construct output in one pass
-    for (auto& pair : tempGroups) {
+    for (const auto& pair : tempGroups) {
         Napi::Object groupObj = Napi::Object::New(env);
-        auto& props = pair.second;
-        props.reserve(props.size());
-        for (const auto& prop : props) {
+        for (const auto& prop : pair.second) {
             groupObj.Set(prop.first, prop.second);
         }
         outputObj.Set(pair.first, groupObj);
