@@ -10,18 +10,16 @@ func main() {
 	var p Publisher = newPublisher()
 	p.broadcast("hello")
 
-	s := newSubscriber("123")
+	p.addSubscriber(newSubscriber("Subscriber one"))
+	p.addSubscriber(newAutoGenerateIdSubscriber())
+	p.addSubscriber(newSubscriber("Subscriber three"))
 
-	p.addSubscriber(s)
+	p.broadcast("hello subscriber")
 
-	p.broadcast("hello again")
+	log.Println("After removing the one ===============")
 
-	a1 := newAutoGenerateIdSubscriber()
-
-	p.addSubscriber(a1)
-
-	p.broadcast("Hello with auto id")
-
+	p.removeSubscriber("Subscriber three")
+	p.broadcast("Hello remove new one")
 }
 
 // Interfaces
