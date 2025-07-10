@@ -7,4 +7,9 @@ mern/api/dist
 client/api/node_modules
 linear_algebra/env
 linear_algebra/.ipynb_checkpoints
+llm/a.out
+llm/main
 
+cpp_with_ts/node_modules
+cpp_with_ts/dist
+cpp_with_ts/build

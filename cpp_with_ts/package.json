@@ -1,0 +1,24 @@
+{
+  "name": "cpp_with_ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "node:gpy": "node-gyp clean && node-gyp configure && node-gyp build --verbose",
+    "start": "ts-node --transpile-only index.ts",
+    "test:time": "ts-node prefTest.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "node-gyp": "^11.2.0",
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "node-addon-api": "^8.4.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3"
+  }
+}
