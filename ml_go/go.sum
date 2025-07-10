@@ -1,0 +1,6 @@
+github.com/tensorflow/tensorflow v2.13.0+incompatible h1:NBIzn/d5zzywu5qNYKC8dJ8aMayjBtWLUTVKUa0+ZrM=
+github.com/tensorflow/tensorflow v2.13.0+incompatible/go.mod h1:itOSERT4trABok4UOoG+X4BoKds9F3rIsySdn+Lvu90=
+github.com/wamuir/graft v0.10.0 h1:HSpBUvm7O+jwsRIuDQlw80xW4xMXRFkOiVLtWaZCU2s=
+github.com/wamuir/graft v0.10.0/go.mod h1:k6NJX3fCM/xzh5NtHky9USdgHTcz2vAvHp4c23I6UK4=
+google.golang.org/protobuf v1.34.2 h1:6xV6lTsCfpGD21XK49h7MhtcApnLqkfYgPcdHftf6hg=
+google.golang.org/protobuf v1.34.2/go.mod h1:qYOHts0dSfpeUzUFpOMr/WGzszTmLH+DiWniOlNbLDw=

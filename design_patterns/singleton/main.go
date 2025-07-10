@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"singleton/generator"
 	idservice "singleton/id_service"
 )
 
@@ -20,6 +21,13 @@ func main() {
 
 	u3 := NewUser().withId(s2.Next())
 	log.Println(u3)
+
+	// thread safe id service
+	for i := 0; i < 100; i++ {
+		s4 := generator.GetIDService()
+		s5 := generator.GetIDService()
+		log.Println(s4.New(), s5.New())
+	}
 }
 
 // users
