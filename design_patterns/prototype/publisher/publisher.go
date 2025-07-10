@@ -25,13 +25,13 @@ func (p BookPublisher) Clone() interface{} {
 	}
 }
 
+func (p *BookPublisher) Publish(msg string) {
+	fullMessage := fmt.Sprint("Publisher ", p.id, " > ", msg)
+	log.Print(fullMessage)
+}
+
 func NewBookPublisher() *BookPublisher {
 	return &BookPublisher{
 		id: fmt.Sprint(rand.Int()),
 	}
-}
-
-func (p *BookPublisher) Publish(msg string) {
-	fullMessage := fmt.Sprint("Publisher ", p.id, " > ", msg)
-	log.Print(fullMessage)
 }
